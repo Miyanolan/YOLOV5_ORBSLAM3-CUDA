@@ -39,6 +39,7 @@
 #include "Viewer.h"
 #include "ImuTypes.h"
 #include "Settings.h"
+#include "YoloDetect.h"
 
 
 namespace ORB_SLAM3
@@ -262,6 +263,9 @@ private:
     string mStrVocabularyFilePath;
 
     Settings* settings_;
+
+    //Yolo
+    YoloDetection* mpDetector;
 };
 
 }// namespace ORB_SLAM

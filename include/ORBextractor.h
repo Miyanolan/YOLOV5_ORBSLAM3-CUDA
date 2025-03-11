@@ -81,6 +81,8 @@ public:
     }
 
     std::vector<cv::Mat> mvImagePyramid;
+    std::vector<cv::Rect2i> mvDynamicArea; //bbox
+    // std::vector<cv::mask> ;                 //mask
 
 protected:
 

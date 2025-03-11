@@ -38,6 +38,7 @@
 #include "Settings.h"
 
 #include "GeometricCamera.h"
+#include "YoloDetect.h"
 
 #include <mutex>
 #include <unordered_set>
@@ -78,6 +79,7 @@ public:
     void SetLocalMapper(LocalMapping* pLocalMapper);
     void SetLoopClosing(LoopClosing* pLoopClosing);
     void SetViewer(Viewer* pViewer);
+    void SetDetector(YoloDetection* pDetector);
     void SetStepByStep(bool bSet);
     bool GetStepByStep();
 
@@ -282,6 +284,10 @@ protected:
     FrameDrawer* mpFrameDrawer;
     MapDrawer* mpMapDrawer;
     bool bStepByStep;
+
+    //yolo
+
+    YoloDetection* mpDetector;
 
     //Atlas
     Atlas* mpAtlas;

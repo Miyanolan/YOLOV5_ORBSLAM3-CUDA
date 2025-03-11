@@ -1439,6 +1439,11 @@ void Tracking::SetViewer(Viewer *pViewer)
     mpViewer=pViewer;
 }
 
+void Tracking::SetDetector(YoloDetection* pDetector)
+{
+    mpDetector = pDetector;
+}
+
 void Tracking::SetStepByStep(bool bSet)
 {
     bStepByStep = bSet;
@@ -1521,6 +1526,19 @@ Sophus::SE3f Tracking::GrabImageRGBD(const cv::Mat &imRGB,const cv::Mat &imD, co
 {
     mImGray = imRGB;
     cv::Mat imDepth = imD;
+
+    //Yolo
+    cv::Mat InputImage;
+    InputImage = imRGB.clone();
+    mpDetector->GetImage(InputImage);
+    mpDetector->Detect();
+    mpORBextractorLeft->mvDynamicArea = mpDetector->mvDynamicArea;
+    {
+        std::unique_lock<std::mutex> lock(mpViewer->mMutexPAFinsh);
+        mpViewer->mmDetectMap = mpDetector->mmDetectMap;
+    }
+    mpDetector->mvDynamicArea.clear();
+    mpDetector->mmDetectMap.clear();
 
     if(mImGray.channels()==3)
     {
