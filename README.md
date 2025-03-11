@@ -1,3 +1,1 @@
-<<<<<<< HEAD
-# YOLOV5_ORBSLAM3
->>>>>>> END
+YOLOV5_ORBSLAM3
